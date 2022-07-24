@@ -2,6 +2,8 @@ import "package:bmi_calculator/reusable_card.dart";
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import "gender_icon.dart";
+import 'package:bmi_calculator/results_bmi.dart';
+import "calculator_brain.dart";
 
 const inactivecardcolor = Color(0xFF111328);
 const activecardcolor = Color(0xFF1D1E33);
@@ -134,137 +136,183 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-                child: Row(
-              children: [
-                Expanded(
-                  child: Reusable_card(
-                    color: const Color(0xFF1D1E33),
-                    Cardchild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "WEIGHT",
-                          style: TextStyle(
-                            color: Color(0xFF8D8E98),
-                            fontSize: 20,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Reusable_card(
+                      color: const Color(0xFF1D1E33),
+                      Cardchild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "WEIGHT",
+                            style: TextStyle(
+                              color: Color(0xFF8D8E98),
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text(
-                                weight.toString(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: Text(
+                                  weight.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                "kg",
+                                style: TextStyle(
+                                  color: Color(0xFF8D8E98),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                                child: const Icon(FontAwesomeIcons.plus,
+                                    color: Colors.white),
+                              ),
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              FloatingActionButton(
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                },
+                                child: const Icon(FontAwesomeIcons.minus,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Reusable_card(
+                      color: const Color(0xFF1D1E33),
+                      Cardchild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "AGE",
+                            style: TextStyle(
+                              color: Color(0xFF8D8E98),
+                              fontSize: 20,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                age.toString(),
                                 style: const TextStyle(
                                   fontSize: 50,
                                   fontWeight: FontWeight.w900,
                                 ),
                               ),
-                            ),
-                            const Text(
-                              "kg",
-                              style: TextStyle(
-                                color: Color(0xFF8D8E98),
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FloatingActionButton(
-                              backgroundColor: const Color(0xFF4C4F5E),
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
-                              child: const Icon(FontAwesomeIcons.plus,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(
-                              width: 15.0,
-                            ),
-                            FloatingActionButton(
-                              backgroundColor: const Color(0xFF4C4F5E),
-                              onPressed: () {
-                                setState(() {
-                                  weight--;
-                                });
-                              },
-                              child: const Icon(FontAwesomeIcons.minus,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Reusable_card(
-                    color: const Color(0xFF1D1E33),
-                    Cardchild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "AGE",
-                          style: TextStyle(
-                            color: Color(0xFF8D8E98),
-                            fontSize: 20,
+                            ],
                           ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              age.toString(),
-                              style: const TextStyle(
-                                fontSize: 50,
-                                fontWeight: FontWeight.w900,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FloatingActionButton(
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                                child: const Icon(FontAwesomeIcons.plus,
+                                    color: Colors.white),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FloatingActionButton(
-                              backgroundColor: const Color(0xFF4C4F5E),
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                              child: const Icon(FontAwesomeIcons.plus,
-                                  color: Colors.white),
-                            ),
-                            const SizedBox(
-                              width: 15.0,
-                            ),
-                            FloatingActionButton(
-                              backgroundColor: const Color(0xFF4C4F5E),
-                              onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                              child: const Icon(FontAwesomeIcons.minus,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        )
-                      ],
+                              const SizedBox(
+                                width: 15.0,
+                              ),
+                              FloatingActionButton(
+                                backgroundColor: const Color(0xFF4C4F5E),
+                                onPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                                child: const Icon(FontAwesomeIcons.minus,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )),
+                ],
+              ),
+            ),
+            bottombutton(
+              buttontitle: "CALCULATE",
+              onTap: () {
+                CalulatorBrain calc =
+                    CalulatorBrain(height: height, weight: weight);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Results(
+                              bmiresult: calc.calculateBMI(),
+                              resulttext: calc.getResult(),
+                              interpretation: calc.getInterpretation(),
+                            )));
+              },
+            ),
           ],
         ));
+  }
+}
+
+class bottombutton extends StatelessWidget {
+  bottombutton({required this.onTap, required this.buttontitle});
+
+  final VoidCallback onTap;
+  final String buttontitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 70.0,
+        margin: EdgeInsets.only(top: 10.0),
+        child: Center(
+            child: Text(
+          buttontitle,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.5,
+          ),
+        )),
+        color: Color(0xFFEB1555),
+      ),
+    );
   }
 }
